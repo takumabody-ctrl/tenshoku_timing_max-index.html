@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>転職 最適タイミング 手取り最大化判定｜PREMIUM ¥500 診断ツール</title>
+<meta name="description" content="現在の年収・勤続年数・年齢から、転職の最適タイミングと手取り増加額を数値で判定。投資回収期間・市場価値スコア・PDF出力対応のPREMIUMツール。">
+<meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="転職 最適タイミング 手取り最大化判定">
+<meta property="og:description" content="転職は「やる気」じゃなく「タイミング」で決まる。">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  /* ========== ベース ========== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #0a0a0f;
+    color: #f1f5f9;
+    line-height: 1.7;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(circle at 18% 10%, rgba(20, 184, 166, 0.10), transparent 50%),
+      radial-gradient(circle at 82% 60%, rgba(45, 212, 191, 0.06), transparent 55%),
+      radial-gradient(circle at 50% 100%, rgba(13, 148, 136, 0.06), transparent 60%);
+    background-attachment: fixed;
+    position: relative;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.010) 0px,
+      rgba(255,255,255,0.010) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 16px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ========== ウェルカム / プレミアム ========== */
+  .welcome-bar {
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(45, 212, 191, 0.08));
+    border: 1px solid rgba(20, 184, 166, 0.4);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 16px 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12.5px;
+    color: #2dd4bf;
+    font-weight: 700;
+    animation: fadeDown 0.6s ease;
+  }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .welcome-bar .check {
+    width: 22px; height: 22px;
+    background: linear-gradient(135deg, #14b8a6, #2dd4bf);
+    color: #0a0a0f;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ========== ヘッダー ========== */
+  .header {
+    text-align: center;
+    padding: 24px 0 28px;
+    animation: fadeDown 0.8s ease;
+  }
+  .header-badges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .premium-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    color: #0a0a0f;
+    padding: 6px 14px;
+    border-radius: 2px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    box-shadow: 0 0 24px rgba(20, 184, 166, 0.5);
+    animation: premiumPulse 2.4s ease-in-out infinite;
+  }
+  @keyframes premiumPulse {
+    0%, 100% { box-shadow: 0 0 24px rgba(20, 184, 166, 0.5); }
+    50% { box-shadow: 0 0 40px rgba(20, 184, 166, 0.8); }
+  }
+  .series-tag {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    color: #94a3b8;
+    letter-spacing: 0.3em;
+    padding: 5px 12px;
+    border: 1px solid #134e4a;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(26px, 6.5vw, 38px);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 8px;
+    letter-spacing: 0.03em;
+  }
+  h1 .h1-line1 {
+    display: block;
+    background: linear-gradient(135deg, #14b8a6 0%, #2dd4bf 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px rgba(20, 184, 166, 0.3);
+  }
+  h1 .h1-line2 {
+    display: block;
+    color: #f1f5f9;
+    font-size: 0.7em;
+    margin-top: 4px;
+    letter-spacing: 0.06em;
+  }
+  .catchphrase {
+    font-size: 14px;
+    color: #cbd5e1;
+    margin: 18px auto 6px;
+    max-width: 520px;
+    line-height: 1.8;
+    font-weight: 500;
+  }
+  .subcopy {
+    font-size: 12px;
+    color: #94a3b8;
+    max-width: 520px;
+    margin: 0 auto 18px;
+  }
+
+  /* このツールでわかること */
+  .feature-list {
+    background: linear-gradient(180deg, rgba(15, 26, 26, 0.95), rgba(10, 20, 20, 0.95));
+    border: 1px solid #134e4a;
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin: 20px 0;
+    text-align: left;
+  }
+  .feature-list-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    color: #2dd4bf;
+    letter-spacing: 0.2em;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .feature-list ul { list-style: none; padding: 0; }
+  .feature-list li {
+    font-size: 12.5px;
+    color: #cbd5e1;
+    padding: 4px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .feature-list li .chk {
+    color: #14b8a6;
+    font-weight: 900;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+
+  /* ========== セクション ========== */
+  .section {
+    background: linear-gradient(180deg, rgba(15, 26, 26, 0.92), rgba(12, 20, 20, 0.92));
+    border: 1px solid #134e4a;
+    border-radius: 4px;
+    padding: 26px 22px;
+    margin: 18px 0;
+    backdrop-filter: blur(8px);
+    animation: fadeUp 0.7s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .step-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    color: #14b8a6;
+    letter-spacing: 0.3em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step-label::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: #14b8a6;
+  }
+  .section-title {
+    font-size: 17px;
+    font-weight: 900;
+    color: #f1f5f9;
+    margin-bottom: 22px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ========== フィールド ========== */
+  .field { margin-bottom: 24px; }
+  .field:last-child { margin-bottom: 0; }
+  .field-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 700;
+    color: #94a3b8;
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+  .field-label .badge-mini {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    color: #14b8a6;
+    letter-spacing: 0.1em;
+  }
+  .field-label .req {
+    font-size: 9px;
+    background: #14b8a6;
+    color: #0a0a0f;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+  }
+  .field-label .opt {
+    font-size: 9px;
+    background: #334155;
+    color: #cbd5e1;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 700;
+  }
+  .hint { font-size: 10.5px; color: #64748b; margin-top: 6px; line-height: 1.5; }
+
+  /* ========== スライダー ========== */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, #14b8a6 0%, #2dd4bf var(--pct, 50%), #134e4a var(--pct, 50%));
+    border-radius: 0;
+    outline: none;
+    margin: 14px 0;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #0a0a0f;
+    border: 2px solid #14b8a6;
+    cursor: pointer;
+    box-shadow: 0 0 14px rgba(20, 184, 166, 0.6);
+    transition: transform 0.18s;
+  }
+  input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+  input[type="range"]::-moz-range-thumb {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: #0a0a0f;
+    border: 2px solid #14b8a6;
+    cursor: pointer;
+    box-shadow: 0 0 14px rgba(20, 184, 166, 0.6);
+  }
+  .slider-touch { padding: 12px 0; margin: -12px 0; }
+  .slider-marks {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #475569;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.06em;
+  }
+
+  /* ========== 大数字表示 ========== */
+  .big-num-display {
+    text-align: center;
+    margin: 8px 0 12px;
+  }
+  .big-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: #2dd4bf;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-shadow:
+      0 0 20px rgba(45, 212, 191, 0.5),
+      0 0 40px rgba(20, 184, 166, 0.3);
+  }
+  .big-num .yen { font-size: 22px; color: #94a3b8; margin-right: 2px; vertical-align: top; }
+  .big-num .unit { font-size: 14px; color: #94a3b8; font-family: 'Noto Sans JP', sans-serif; margin-left: 6px; font-weight: 400; }
+
+  /* リアルタイムプレビュー */
+  .live-preview {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: rgba(20, 184, 166, 0.05);
+    border: 1px solid rgba(20, 184, 166, 0.2);
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .live-preview .lbl { color: #94a3b8; letter-spacing: 0.05em; }
+  .live-preview .val {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+  }
+
+  /* ========== ボタングループ ========== */
+  .btn-grid {
+    display: grid;
+    gap: 8px;
+  }
+  .btn-grid.col-2 { grid-template-columns: 1fr 1fr; }
+  .btn-grid.col-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .btn-grid.col-4 { grid-template-columns: repeat(4, 1fr); }
+  .btn-grid.col-5 { grid-template-columns: repeat(5, 1fr); }
+  .btn-grid.col-6 { grid-template-columns: repeat(6, 1fr); }
+  @media (max-width: 520px) {
+    .btn-grid.col-5, .btn-grid.col-6 { grid-template-columns: repeat(3, 1fr); }
+    .btn-grid.col-4 { grid-template-columns: 1fr 1fr; }
+  }
+  .opt-btn {
+    background: #0f1a1a;
+    border: 1px solid #134e4a;
+    color: #94a3b8;
+    padding: 13px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: inherit;
+    text-align: center;
+    line-height: 1.4;
+    position: relative;
+    overflow: hidden;
+  }
+  .opt-btn:hover {
+    border-color: rgba(20, 184, 166, 0.5);
+    color: #f1f5f9;
+    transform: translateY(-1px);
+  }
+  .opt-btn.active {
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.25), rgba(45, 212, 191, 0.12));
+    border-color: #14b8a6;
+    color: #2dd4bf;
+    box-shadow: 0 0 18px rgba(20, 184, 166, 0.3);
+  }
+  .opt-btn .emoji { display: block; font-size: 18px; margin-bottom: 4px; line-height: 1; }
+
+  /* チェックボックスグループ */
+  .check-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  @media (max-width: 520px) {
+    .check-grid { grid-template-columns: 1fr; }
+  }
+  .check-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0f1a1a;
+    border: 1px solid #134e4a;
+    padding: 10px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-size: 12px;
+    color: #cbd5e1;
+    font-weight: 600;
+  }
+  .check-row:hover { border-color: rgba(20, 184, 166, 0.5); }
+  .check-row input[type="checkbox"] {
+    width: 16px; height: 16px;
+    accent-color: #14b8a6;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .check-row.checked {
+    background: rgba(20, 184, 166, 0.08);
+    border-color: rgba(20, 184, 166, 0.5);
+    color: #2dd4bf;
+  }
+
+  /* ========== 満足度4軸スライダー ========== */
+  .satisfaction-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .sat-item {
+    background: #0f1a1a;
+    border: 1px solid #134e4a;
+    border-radius: 3px;
+    padding: 14px 14px;
+  }
+  .sat-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .sat-name {
+    font-size: 12.5px;
+    color: #cbd5e1;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sat-value {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px;
+    color: #2dd4bf;
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(45, 212, 191, 0.4);
+  }
+  .sat-value .max { font-size: 10px; color: #475569; margin-left: 1px; }
+  .sat-total {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: rgba(251, 191, 36, 0.06);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    border-radius: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sat-total .lbl { color: #94a3b8; font-size: 11.5px; letter-spacing: 0.05em; }
+  .sat-total .val {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #fbbf24;
+    text-shadow: 0 0 14px rgba(251, 191, 36, 0.4);
+  }
+
+  /* ========== CTAボタン ========== */
+  .cta-wrap { text-align: center; margin: 32px 0 12px; }
+  .cta-btn {
+    background: linear-gradient(135deg, #14b8a6 0%, #2dd4bf 100%);
+    border: none;
+    color: #0a0a0f;
+    padding: 20px 56px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.25em;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+      0 0 32px rgba(20, 184, 166, 0.4),
+      0 4px 14px rgba(0, 0, 0, 0.4);
+    text-transform: uppercase;
+  }
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 50px rgba(20, 184, 166, 0.6),
+      0 8px 24px rgba(0, 0, 0, 0.5);
+  }
+  .cta-btn:active { transform: translateY(0); }
+  .cta-wrap.calculated .cta-btn {
+    background: linear-gradient(135deg, #0f1a1a, #134e4a);
+    color: #94a3b8;
+    box-shadow: 0 0 12px rgba(20, 184, 166, 0.2);
+  }
+  .cta-wrap.calculated .cta-btn:hover { color: #2dd4bf; }
+
+  /* ========== 結果セクション ========== */
+  #resultArea {
+    display: none;
+  }
+  #resultArea.show {
+    display: block;
+    animation: resultReveal 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  @keyframes resultReveal {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .result-block {
+    animation: blockReveal 0.6s ease backwards;
+  }
+  .result-block:nth-child(1) { animation-delay: 0.0s; }
+  .result-block:nth-child(2) { animation-delay: 0.15s; }
+  .result-block:nth-child(3) { animation-delay: 0.30s; }
+  .result-block:nth-child(4) { animation-delay: 0.45s; }
+  .result-block:nth-child(5) { animation-delay: 0.60s; }
+  .result-block:nth-child(6) { animation-delay: 0.75s; }
+  .result-block:nth-child(7) { animation-delay: 0.90s; }
+  .result-block:nth-child(8) { animation-delay: 1.05s; }
+  @keyframes blockReveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ① タイミング判定バナー */
+  .timing-banner {
+    text-align: center;
+    padding: 36px 24px;
+    margin: 20px 0;
+    background: linear-gradient(135deg, rgba(20, 184, 166, 0.10), rgba(13, 148, 136, 0.05));
+    border: 2px solid #14b8a6;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+  }
+  .timing-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(20, 184, 166, 0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .timing-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    color: #94a3b8;
+    letter-spacing: 0.3em;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    position: relative;
+  }
+  .timing-icon {
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 10px;
+    display: block;
+    position: relative;
+  }
+  .timing-name {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: clamp(20px, 5vw, 26px);
+    font-weight: 900;
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+    position: relative;
+  }
+  .timing-score {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    margin: 8px 0;
+    position: relative;
+  }
+  .timing-score .denom { font-size: 18px; color: #64748b; }
+  .timing-message {
+    font-size: 13px;
+    color: #cbd5e1;
+    line-height: 1.8;
+    margin-top: 12px;
+    position: relative;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* 判定別カラー */
+  .timing-banner.lv-go { border-color: #22c55e; background: linear-gradient(135deg, rgba(34, 197, 94, 0.10), rgba(34, 197, 94, 0.04)); }
+  .timing-banner.lv-go .timing-score { color: #22c55e; text-shadow: 0 0 30px rgba(34, 197, 94, 0.5); }
+  .timing-banner.lv-go .timing-name { color: #22c55e; }
+  .timing-banner.lv-prepare { border-color: #14b8a6; }
+  .timing-banner.lv-prepare .timing-score { color: #2dd4bf; text-shadow: 0 0 30px rgba(45, 212, 191, 0.5); }
+  .timing-banner.lv-prepare .timing-name { color: #2dd4bf; }
+  .timing-banner.lv-wait { border-color: #fbbf24; background: linear-gradient(135deg, rgba(251, 191, 36, 0.10), rgba(251, 191, 36, 0.04)); }
+  .timing-banner.lv-wait .timing-score { color: #fbbf24; text-shadow: 0 0 30px rgba(251, 191, 36, 0.5); }
+  .timing-banner.lv-wait .timing-name { color: #fbbf24; }
+  .timing-banner.lv-build { border-color: #f97316; background: linear-gradient(135deg, rgba(249, 115, 22, 0.10), rgba(249, 115, 22, 0.04)); }
+  .timing-banner.lv-build .timing-score { color: #f97316; text-shadow: 0 0 30px rgba(249, 115, 22, 0.5); }
+  .timing-banner.lv-build .timing-name { color: #f97316; }
+  .timing-banner.lv-stay { border-color: #ef4444; background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.04)); }
+  .timing-banner.lv-stay .timing-score { color: #ef4444; text-shadow: 0 0 30px rgba(239, 68, 68, 0.5); }
+  .timing-banner.lv-stay .timing-name { color: #ef4444; }
+
+  /* ② 手取りシミュレーション */
+  .sim-card {
+    background: linear-gradient(180deg, rgba(15, 26, 26, 0.95), rgba(10, 20, 20, 0.95));
+    border: 1px solid #134e4a;
+    border-radius: 4px;
+    padding: 24px 22px;
+    margin: 18px 0;
+  }
+  .sim-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    color: #2dd4bf;
+    letter-spacing: 0.2em;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .sim-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 520px) { .sim-grid { grid-template-columns: 1fr; } }
+  .sim-cell {
+    background: #0a1414;
+    border: 1px solid #134e4a;
+    border-radius: 3px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .sim-cell .sim-label {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .sim-cell .sim-val {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: #cbd5e1;
+    line-height: 1.2;
+  }
+  .sim-cell .sim-val .yen { font-size: 14px; color: #64748b; margin-right: 1px; }
+  .sim-cell .sim-val .small { font-size: 12px; color: #64748b; }
+  .sim-cell.after { border-color: rgba(20, 184, 166, 0.5); background: rgba(20, 184, 166, 0.05); }
+  .sim-cell.after .sim-val { color: #2dd4bf; text-shadow: 0 0 12px rgba(45, 212, 191, 0.4); }
+  .sim-arrow {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    color: #14b8a6;
+    text-align: center;
+  }
+  @media (max-width: 520px) { .sim-arrow { transform: rotate(90deg); } }
+
+  .sim-diff-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  @media (max-width: 520px) { .sim-diff-row { grid-template-columns: 1fr; } }
+  .sim-diff {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.10), rgba(251, 191, 36, 0.03));
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    border-radius: 3px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .sim-diff .lbl { font-size: 11px; color: #94a3b8; margin-bottom: 6px; }
+  .sim-diff .num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: #fbbf24;
+    text-shadow: 0 0 16px rgba(251, 191, 36, 0.4);
+  }
+  .sim-diff .num.minus { color: #ef4444; text-shadow: 0 0 16px rgba(239, 68, 68, 0.4); }
+  .sim-diff .num .yen { font-size: 14px; color: #94a3b8; }
+  .sim-diff .num .sign { font-size: 14px; color: #94a3b8; }
+
+  /* ③ コスト / ROI */
+  .cost-list {
+    display: grid;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .cost-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #0a1414;
+    border-left: 2px solid #134e4a;
+    border-radius: 2px;
+    font-size: 12.5px;
+  }
+  .cost-row .ck-lbl { color: #cbd5e1; }
+  .cost-row .ck-val {
+    font-family: 'Orbitron', sans-serif;
+    color: #f1f5f9;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .cost-row.total {
+    background: rgba(20, 184, 166, 0.08);
+    border-left-color: #14b8a6;
+    margin-top: 8px;
+    padding: 14px;
+  }
+  .cost-row.total .ck-lbl { color: #2dd4bf; font-weight: 800; }
+  .cost-row.total .ck-val { color: #2dd4bf; font-size: 18px; text-shadow: 0 0 10px rgba(45, 212, 191, 0.3); }
+  .roi-box {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.12), rgba(20, 184, 166, 0.06));
+    border: 1px solid rgba(251, 191, 36, 0.4);
+    border-radius: 3px;
+    padding: 18px 16px;
+    margin-top: 16px;
+    text-align: center;
+  }
+  .roi-label { font-size: 11px; color: #94a3b8; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .roi-number {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #fbbf24;
+    text-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+    line-height: 1;
+  }
+  .roi-number .unit { font-size: 14px; color: #94a3b8; margin-left: 4px; }
+  .roi-msg {
+    font-size: 12.5px;
+    color: #cbd5e1;
+    margin-top: 10px;
+    line-height: 1.7;
+  }
+
+  /* ④⑤ プレミアム限定セクション */
+  .premium-section {
+    background: linear-gradient(180deg, rgba(15, 26, 26, 0.98), rgba(10, 20, 20, 0.98));
+    border: 1px solid #14b8a6;
+    border-radius: 4px;
+    padding: 24px 22px;
+    margin: 18px 0;
+    position: relative;
+  }
+  .premium-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 50px; height: 2px;
+    background: linear-gradient(90deg, #14b8a6, transparent);
+  }
+  .premium-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    color: #0a0a0f;
+    padding: 3px 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 9.5px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+  .premium-title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #f1f5f9;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* 比較表 */
+  .comparison-wrap {
+    overflow-x: auto;
+    margin: 0 -10px;
+  }
+  .comparison-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 480px;
+    font-size: 12px;
+    margin: 0 auto;
+  }
+  .comparison-table th, .comparison-table td {
+    padding: 12px 10px;
+    text-align: center;
+    border-bottom: 1px solid #134e4a;
+  }
+  .comparison-table th {
+    background: #0a1414;
+    color: #94a3b8;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-bottom: 2px solid #14b8a6;
+  }
+  .comparison-table th.now-col { color: #fbbf24; }
+  .comparison-table th.wait-col { color: #2dd4bf; }
+  .comparison-table td:first-child {
+    text-align: left;
+    color: #94a3b8;
+    font-size: 11.5px;
+    background: rgba(20, 184, 166, 0.03);
+  }
+  .comparison-table td.num-cell {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: #cbd5e1;
+  }
+  .comparison-table td.verdict { font-weight: 900; font-size: 14px; }
+  .comparison-table tr.highlight td {
+    background: rgba(20, 184, 166, 0.06);
+    color: #2dd4bf;
+  }
+
+  /* 市場価値スコア */
+  .market-score {
+    text-align: center;
+    margin: 16px 0;
+  }
+  .market-bar {
+    position: relative;
+    height: 18px;
+    background: linear-gradient(to right, #ef4444 0%, #fbbf24 40%, #22c55e 80%);
+    border-radius: 9px;
+    overflow: hidden;
+    margin: 10px 0;
+  }
+  .market-pointer {
+    position: absolute;
+    top: -4px;
+    width: 4px;
+    height: 26px;
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+    transition: left 1s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-2px);
+  }
+  .market-score-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: #2dd4bf;
+    text-shadow: 0 0 20px rgba(45, 212, 191, 0.5);
+    line-height: 1;
+    margin: 14px 0 4px;
+  }
+  .market-score-num .denom { font-size: 16px; color: #64748b; }
+  .market-msg {
+    font-size: 12.5px;
+    color: #cbd5e1;
+    margin-top: 8px;
+    line-height: 1.7;
+  }
+  .market-msg .hl { color: #fbbf24; font-weight: 800; }
+
+  /* 業種別熱量バー */
+  .industry-heat {
+    margin-top: 20px;
+  }
+  .heat-row {
+    margin-bottom: 8px;
+  }
+  .heat-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  .heat-name { color: #cbd5e1; }
+  .heat-pct {
+    font-family: 'Orbitron', sans-serif;
+    color: #2dd4bf;
+    font-weight: 700;
+  }
+  .heat-bar {
+    height: 6px;
+    background: #134e4a;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .heat-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #14b8a6, #2dd4bf);
+    border-radius: 2px;
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 10px rgba(20, 184, 166, 0.4);
+  }
+  .heat-row.your .heat-fill {
+    background: linear-gradient(90deg, #fbbf24, #f97316);
+    box-shadow: 0 0 12px rgba(251, 191, 36, 0.5);
+  }
+  .heat-row.your .heat-name { color: #fbbf24; font-weight: 800; }
+
+  /* レーダーチャート */
+  .radar-wrap {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .radar-svg {
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+  }
+  .radar-legend {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 11.5px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: #0a1414;
+    border: 1px solid #134e4a;
+    border-radius: 2px;
+  }
+  .legend-item .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-item.tag-leave { border-color: rgba(239, 68, 68, 0.4); }
+  .legend-item.tag-leave .dot { background: #ef4444; }
+  .legend-item.tag-stay { border-color: rgba(34, 197, 94, 0.4); }
+  .legend-item.tag-stay .dot { background: #22c55e; }
+  .legend-item.tag-neutral { border-color: rgba(148, 163, 184, 0.4); }
+  .legend-item.tag-neutral .dot { background: #94a3b8; }
+
+  /* ⑦ アクションプラン */
+  .action-list {
+    list-style: none;
+    counter-reset: act;
+    padding: 0;
+    margin-top: 14px;
+  }
+  .action-list li {
+    background: #0a1414;
+    border: 1px solid #134e4a;
+    border-left: 3px solid #14b8a6;
+    border-radius: 3px;
+    padding: 14px 16px 14px 50px;
+    margin-bottom: 8px;
+    position: relative;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #cbd5e1;
+    counter-increment: act;
+  }
+  .action-list li::before {
+    content: counter(act);
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px; height: 26px;
+    background: linear-gradient(135deg, #14b8a6, #2dd4bf);
+    color: #0a0a0f;
+    font-weight: 900;
+    font-size: 13px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  /* ⑧ PDFボタン */
+  .pdf-wrap {
+    text-align: center;
+    margin: 24px 0;
+  }
+  .pdf-btn {
+    background: linear-gradient(135deg, #134e4a, #0f1a1a);
+    border: 1px solid #14b8a6;
+    color: #2dd4bf;
+    padding: 14px 24px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pdf-btn:hover {
+    background: linear-gradient(135deg, #14b8a6, #0d9488);
+    color: #0a0a0f;
+    transform: translateY(-1px);
+    box-shadow: 0 0 24px rgba(20, 184, 166, 0.5);
+  }
+
+  /* シェア */
+  .share-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .share-btn {
+    background: #0f1a1a;
+    border: 1px solid #134e4a;
+    color: #cbd5e1;
+    padding: 13px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.22s;
+    font-family: inherit;
+  }
+  .share-btn:hover {
+    border-color: rgba(20, 184, 166, 0.5);
+    background: #112020;
+  }
+
+  /* ========== フッター ========== */
+  footer {
+    text-align: center;
+    padding: 44px 16px 32px;
+    color: #475569;
+    font-size: 11px;
+    line-height: 1.9;
+  }
+  .footer-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    color: #14b8a6;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+  .footer-desc {
+    font-size: 11px;
+    color: #64748b;
+    margin-bottom: 24px;
+    line-height: 1.8;
+  }
+  .sister-section {
+    margin: 28px 0 24px;
+    padding-top: 24px;
+    border-top: 1px solid #134e4a;
+  }
+  .sister-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    color: #14b8a6;
+    letter-spacing: 0.25em;
+    margin-bottom: 12px;
+  }
+  .sister-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0f1a1a;
+    border: 1px solid #134e4a;
+    border-radius: 3px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    color: #cbd5e1;
+    text-decoration: none;
+    transition: all 0.25s;
+    font-size: 12.5px;
+    font-weight: 500;
+    gap: 8px;
+  }
+  .sister-link:hover {
+    border-color: rgba(20, 184, 166, 0.5);
+    color: #2dd4bf;
+    transform: translateX(4px);
+  }
+  .sister-link .arrow { color: #14b8a6; font-family: 'Orbitron', sans-serif; }
+  .sister-link .price {
+    font-size: 10px;
+    background: rgba(20, 184, 166, 0.15);
+    color: #2dd4bf;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 800;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.05em;
+  }
+  .sister-link .price.free {
+    background: rgba(148, 163, 184, 0.15);
+    color: #94a3b8;
+  }
+  .sister-link .price.soon {
+    background: rgba(251, 191, 36, 0.12);
+    color: #fbbf24;
+  }
+  .note-link {
+    margin-top: 16px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+  }
+  .note-link a {
+    color: #2dd4bf;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(45, 212, 191, 0.3);
+    padding-bottom: 1px;
+  }
+  .disclaimer-final {
+    margin-top: 18px;
+    font-size: 10px;
+    color: #475569;
+  }
+
+  /* トースト */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: linear-gradient(135deg, #14b8a6, #2dd4bf);
+    color: #0a0a0f;
+    padding: 12px 24px;
+    border-radius: 3px;
+    font-weight: 800;
+    font-size: 12px;
+    box-shadow: 0 8px 32px rgba(20, 184, 166, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    z-index: 100;
+    letter-spacing: 0.05em;
+    font-family: 'Orbitron', sans-serif;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .hidden { display: none !important; }
+
+  /* ========== 印刷用CSS ========== */
+  @media print {
+    body {
+      background: white;
+      color: black;
+      background-image: none;
+    }
+    body::before { display: none; }
+    .welcome-bar,
+    .cta-wrap,
+    .share-row,
+    .pdf-wrap,
+    footer .sister-section,
+    .toast,
+    .feature-list {
+      display: none !important;
+    }
+    .container { max-width: 100%; padding: 0; }
+    .section,
+    .sim-card,
+    .premium-section,
+    .timing-banner {
+      background: white !important;
+      border: 1px solid #1e293b !important;
+      box-shadow: none !important;
+      page-break-inside: avoid;
+      color: black !important;
+    }
+    h1, h1 .h1-line1, h1 .h1-line2,
+    .section-title, .sim-title, .premium-title,
+    .timing-name, .field-label, .step-label,
+    .cost-row .ck-lbl, .cost-row .ck-val,
+    .roi-msg, .market-msg, .action-list li {
+      color: black !important;
+      text-shadow: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+    }
+    .big-num, .sim-cell .sim-val, .sim-diff .num,
+    .roi-number, .market-score-num, .timing-score {
+      color: #0d9488 !important;
+      text-shadow: none !important;
+    }
+    .opt-btn, .check-row, .sat-item { background: #f8fafc !important; color: black !important; border-color: #cbd5e1 !important; }
+    .opt-btn.active { background: #ccfbf1 !important; color: #134e4a !important; border-color: #14b8a6 !important; }
+    .check-row.checked { background: #ccfbf1 !important; color: #134e4a !important; }
+    /* 入力セクションは印刷時に簡略表示 */
+    .input-section { page-break-after: always; }
+    #resultArea { page-break-before: always; }
+    .result-block { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ========== ウェルカム ========== -->
+  <div class="welcome-bar">
+    <span class="check">✓</span>
+    <span>購入ありがとうございます。<strong style="color:#fff;">フル機能で診断します</strong></span>
+  </div>
+
+  <!-- ========== ヘッダー ========== -->
+  <header class="header">
+    <div class="header-badges">
+      <span class="premium-badge">⭐ PREMIUM ¥500</span>
+      <span class="series-tag">MONEY REALITY · 04</span>
+    </div>
+    <h1>
+      <span class="h1-line1">CAREER TIMING</span>
+      <span class="h1-line2">転職 最適タイミング<br>手取り最大化判定</span>
+    </h1>
+    <p class="catchphrase">転職は「やる気」じゃなく「タイミング」で決まる。</p>
+    <p class="subcopy">今が最適か、あと何ヶ月待つべきか。数字で判定します。</p>
+
+    <div class="feature-list">
+      <div class="feature-list-title">▸ このツールでわかること</div>
+      <ul>
+        <li><span class="chk">✓</span>転職後の月収・手取りの増減額</li>
+        <li><span class="chk">✓</span>転職コストと投資回収期間</li>
+        <li><span class="chk">✓</span>今すぐ vs あと○ヶ月待つの比較</li>
+        <li><span class="chk">✓</span>あなたの転職市場価値スコア</li>
+        <li><span class="chk">✓</span>具体的なアクションプラン＋PDF出力</li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ========== STEP 1: 現在の状況 ========== -->
+  <section class="section input-section">
+    <div class="step-label">STEP 01 · 現在の状況</div>
+    <div class="section-title">あなたの今を入力</div>
+
+    <!-- ① 現在の年収 -->
+    <div class="field">
+      <div class="field-label">
+        <span>現在の年収（額面）</span>
+        <span class="req">必須</span>
+      </div>
+      <div class="big-num-display">
+        <span class="big-num">
+          <span class="yen">¥</span><span id="incomeVal">400</span><span class="unit">万円</span>
+        </span>
+      </div>
+      <div class="slider-touch">
+        <input type="range" id="incomeSlider" min="200" max="1000" step="10" value="400">
+      </div>
+      <div class="slider-marks">
+        <span>200万</span>
+        <span>500万</span>
+        <span>1,000万</span>
+      </div>
+      <div class="live-preview">
+        <span class="lbl">月収換算 / 手取り目安</span>
+        <span class="val">¥<span id="monthlyVal">333,333</span> / ¥<span id="takeHomeVal">266,667</span></span>
+      </div>
+    </div>
+
+    <!-- ② 勤続年数 -->
+    <div class="field">
+      <div class="field-label">
+        <span>現在の勤続年数</span>
+        <span class="req">必須</span>
+      </div>
+      <div class="btn-grid col-3" id="tenureGrid">
+        <button class="opt-btn" data-tenure="<1">1年未満</button>
+        <button class="opt-btn" data-tenure="1-2">1〜2年</button>
+        <button class="opt-btn active" data-tenure="3-4">3〜4年</button>
+        <button class="opt-btn" data-tenure="5-7">5〜7年</button>
+        <button class="opt-btn" data-tenure="8-10">8〜10年</button>
+        <button class="opt-btn" data-tenure="10+">10年以上</button>
+      </div>
+    </div>
+
+    <!-- ③ 業種 -->
+    <div class="field">
+      <div class="field-label">
+        <span>業種</span>
+        <span class="req">必須</span>
+      </div>
+      <div class="btn-grid col-4" id="industryGrid">
+        <button class="opt-btn active" data-industry="IT"><span class="emoji">💻</span>IT・Web</button>
+        <button class="opt-btn" data-industry="金融"><span class="emoji">📊</span>金融・保険</button>
+        <button class="opt-btn" data-industry="製造"><span class="emoji">🏭</span>製造業</button>
+        <button class="opt-btn" data-industry="医療"><span class="emoji">🏥</span>医療・福祉</button>
+        <button class="opt-btn" data-industry="小売"><span class="emoji">🛒</span>小売・流通</button>
+        <button class="opt-btn" data-industry="不動産"><span class="emoji">🏢</span>不動産</button>
+        <button class="opt-btn" data-industry="教育"><span class="emoji">🎓</span>教育</button>
+        <button class="opt-btn" data-industry="その他"><span class="emoji">🔧</span>その他</button>
+      </div>
+    </div>
+
+    <!-- ④ 年齢 -->
+    <div class="field">
+      <div class="field-label">
+        <span>現在の年齢</span>
+        <span class="badge-mini"><span id="ageVal">28</span> YEARS</span>
+      </div>
+      <div class="slider-touch">
+        <input type="range" id="ageSlider" min="22" max="55" step="1" value="28">
+      </div>
+      <div class="slider-marks">
+        <span>22</span><span>30</span><span>40</span><span>55</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STEP 2: 転職先の条件 ========== -->
+  <section class="section input-section">
+    <div class="step-label">STEP 02 · 転職先の条件</div>
+    <div class="section-title">どこに行く想定？</div>
+
+    <!-- ⑤ 想定年収アップ率 -->
+    <div class="field">
+      <div class="field-label">
+        <span>想定年収アップ率</span>
+        <span class="req">必須</span>
+      </div>
+      <div class="btn-grid col-5" id="upRateGrid">
+        <button class="opt-btn" data-up="0">±0%<br><small style="font-size:10px;color:#64748b;">現状維持</small></button>
+        <button class="opt-btn" data-up="10">〜10%</button>
+        <button class="opt-btn active" data-up="20">10〜20%</button>
+        <button class="opt-btn" data-up="30">20〜30%</button>
+        <button class="opt-btn" data-up="40">30%〜</button>
+      </div>
+    </div>
+
+    <!-- ⑥ 転職先の規模 -->
+    <div class="field">
+      <div class="field-label">
+        <span>転職先の規模</span>
+        <span class="opt">任意</span>
+      </div>
+      <div class="btn-grid col-4" id="sizeGrid">
+        <button class="opt-btn" data-size="大企業"><span class="emoji">🏢</span>大企業<br><small style="font-size:9px;">1000名+</small></button>
+        <button class="opt-btn active" data-size="中企業"><span class="emoji">🏬</span>中企業<br><small style="font-size:9px;">100-999名</small></button>
+        <button class="opt-btn" data-size="中小"><span class="emoji">🏪</span>中小<br><small style="font-size:9px;">30-99名</small></button>
+        <button class="opt-btn" data-size="スタートアップ"><span class="emoji">🚀</span>スタートアップ<br><small style="font-size:9px;">〜29名</small></button>
+      </div>
+    </div>
+
+    <!-- ⑦ 希望する働き方 -->
+    <div class="field">
+      <div class="field-label">
+        <span>希望する働き方（複数選択可）</span>
+        <span class="opt">任意</span>
+      </div>
+      <div class="check-grid" id="lifestyleGrid">
+        <label class="check-row">
+          <input type="checkbox" data-life="remote">リモートワーク可
+        </label>
+        <label class="check-row">
+          <input type="checkbox" data-life="overtime">残業少ない（月20h以内）
+        </label>
+        <label class="check-row">
+          <input type="checkbox" data-life="side">副業OK
+        </label>
+        <label class="check-row">
+          <input type="checkbox" data-life="severance">退職金制度あり
+        </label>
+        <label class="check-row">
+          <input type="checkbox" data-life="leave">育休・産休充実
+        </label>
+        <label class="check-row">
+          <input type="checkbox" data-life="cert">資格取得支援
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STEP 3: 現在の会社 ========== -->
+  <section class="section input-section">
+    <div class="step-label">STEP 03 · 現在の会社の状況</div>
+    <div class="section-title">辞めるタイミングを測る</div>
+
+    <!-- ⑧ 賞与・退職金 -->
+    <div class="field">
+      <div class="field-label">
+        <span>賞与の状況</span>
+        <span class="req">必須</span>
+      </div>
+      <div class="btn-grid col-2" id="bonusGrid">
+        <button class="opt-btn" data-bonus="支給前">賞与あり（支給前）</button>
+        <button class="opt-btn active" data-bonus="支給済">賞与あり（支給済）</button>
+        <button class="opt-btn" data-bonus="なし">賞与なし</button>
+        <button class="opt-btn" data-bonus="不明">わからない</button>
+      </div>
+      <div class="hint">「支給前」を選ぶと、待つ価値（賞与額）が損失計算に含まれます。</div>
+    </div>
+
+    <!-- ⑨ 満足度（4軸） -->
+    <div class="field">
+      <div class="field-label">
+        <span>現在の満足度（4軸 / 各0〜10点）</span>
+        <span class="badge-mini">RADAR</span>
+      </div>
+      <div class="satisfaction-grid" id="satGrid">
+        <!-- JS 生成 -->
+      </div>
+      <div class="sat-total">
+        <span class="lbl">▸ 合計満足度</span>
+        <span class="val"><span id="satTotal">25</span>/40</span>
+      </div>
+    </div>
+
+    <!-- ⑩ 活動時間 -->
+    <div class="field">
+      <div class="field-label">
+        <span>転職活動に使える時間</span>
+        <span class="req">必須</span>
+      </div>
+      <div class="btn-grid col-2" id="activityGrid">
+        <button class="opt-btn" data-act="ほぼない">ほぼない<br><small style="font-size:10px;color:#64748b;">月5h以下</small></button>
+        <button class="opt-btn active" data-act="少し">少し<br><small style="font-size:10px;color:#64748b;">月5-20h</small></button>
+        <button class="opt-btn" data-act="まあまあ">まあまあ<br><small style="font-size:10px;color:#64748b;">月20-40h</small></button>
+        <button class="opt-btn" data-act="たっぷり">たっぷり<br><small style="font-size:10px;color:#64748b;">月40h+</small></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 計算ボタン ========== -->
+  <div class="cta-wrap" id="ctaWrap">
+    <button class="cta-btn" id="calcBtn">▷ タイミングを診断する</button>
+  </div>
+
+  <!-- ========== 結果エリア ========== -->
+  <div id="resultArea">
+
+    <!-- ① タイミング判定バナー -->
+    <div class="result-block">
+      <div class="timing-banner lv-prepare" id="timingBanner">
+        <div class="timing-label">▸ YOUR TIMING JUDGEMENT</div>
+        <span class="timing-icon" id="timingIcon">🔵</span>
+        <div class="timing-name" id="timingName">準備を始める段階</div>
+        <div class="timing-score"><span id="timingScore">72</span><span class="denom"> / 100</span></div>
+        <div class="timing-message" id="timingMessage">転職活動を開始するタイミングです。</div>
+      </div>
+    </div>
+
+    <!-- ② 手取りシミュレーション -->
+    <div class="result-block">
+      <div class="sim-card">
+        <div class="sim-title">▸ TAKE-HOME SIMULATION</div>
+        <div class="sim-grid">
+          <div class="sim-cell">
+            <div class="sim-label">▸ 現在の手取り（月）</div>
+            <div class="sim-val"><span class="yen">¥</span><span id="simNowMonth">266,667</span></div>
+          </div>
+          <div class="sim-arrow">→</div>
+          <div class="sim-cell after">
+            <div class="sim-label">▸ 転職後の手取り（月）</div>
+            <div class="sim-val"><span class="yen">¥</span><span id="simAfterMonth">312,000</span></div>
+          </div>
+        </div>
+        <div class="sim-diff-row">
+          <div class="sim-diff">
+            <div class="lbl">年間差額</div>
+            <div class="num"><span class="sign">+</span><span class="yen">¥</span><span id="simYearDiff">544,000</span></div>
+          </div>
+          <div class="sim-diff">
+            <div class="lbl">5年累計差額</div>
+            <div class="num"><span class="sign">+</span><span class="yen">¥</span><span id="sim5yDiff">2,720,000</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ③ 転職コスト / ROI -->
+    <div class="result-block">
+      <div class="sim-card">
+        <div class="sim-title">▸ COST & ROI ANALYSIS</div>
+        <div class="cost-list" id="costList">
+          <!-- JS生成 -->
+        </div>
+        <div class="roi-box">
+          <div class="roi-label">▸ INVESTMENT RECOVERY</div>
+          <div class="roi-number"><span id="roiMonths">6.5</span><span class="unit">ヶ月</span></div>
+          <div class="roi-msg" id="roiMsg">転職後 6.5ヶ月で元が取れる計算です。</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ④ 比較表（プレミアム限定） -->
+    <div class="result-block">
+      <div class="premium-section">
+        <div class="premium-tag">💎 PREMIUM 限定</div>
+        <div class="premium-title">今すぐ vs あと3ヶ月待つ 比較</div>
+        <div class="comparison-wrap">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th class="now-col">今すぐ転職</th>
+                <th class="wait-col">3ヶ月後</th>
+              </tr>
+            </thead>
+            <tbody id="comparisonBody">
+              <!-- JS生成 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ 市場価値スコア（プレミアム限定） -->
+    <div class="result-block">
+      <div class="premium-section">
+        <div class="premium-tag">💎 PREMIUM 分析</div>
+        <div class="premium-title">あなたの転職市場価値スコア</div>
+        <div class="market-score">
+          <div class="market-score-num"><span id="marketScore">74</span><span class="denom"> / 100</span></div>
+          <div class="market-bar">
+            <div class="market-pointer" id="marketPointer" style="left:0%"></div>
+          </div>
+          <div class="market-msg" id="marketMsg">同年代・同業種の転職成功率目安：<span class="hl"><span id="successRate">68</span>%</span></div>
+        </div>
+
+        <div class="industry-heat">
+          <div style="font-family:'Orbitron',sans-serif;font-size:10px;color:#94a3b8;letter-spacing:0.15em;margin-bottom:12px;">▸ 業種別 転職市場の熱量</div>
+          <div id="heatList"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑥ レーダーチャート -->
+    <div class="result-block">
+      <div class="premium-section">
+        <div class="premium-tag">💎 詳細診断</div>
+        <div class="premium-title">満足度4軸レーダー診断</div>
+        <div class="radar-wrap">
+          <svg class="radar-svg" id="radarSvg" viewBox="0 0 320 280" xmlns="http://www.w3.org/2000/svg" aria-label="4軸レーダー">
+            <!-- JSで描画 -->
+          </svg>
+        </div>
+        <div class="radar-legend" id="radarLegend"></div>
+      </div>
+    </div>
+
+    <!-- ⑦ アクションプラン -->
+    <div class="result-block">
+      <div class="sim-card">
+        <div class="sim-title">▸ NEXT ACTION PLAN</div>
+        <div style="font-size:13px;color:#cbd5e1;margin-bottom:6px;line-height:1.7;">判定結果に応じた具体的な3アクション：</div>
+        <ol class="action-list" id="actionList"></ol>
+      </div>
+    </div>
+
+    <!-- ⑧ PDF / シェア -->
+    <div class="result-block">
+      <div class="pdf-wrap">
+        <button class="pdf-btn" id="pdfBtn">📄 この診断結果をPDFで保存する</button>
+      </div>
+      <div class="share-row">
+        <button class="share-btn" id="copyBtn">📋 結果をコピー</button>
+        <button class="share-btn" id="tweetBtn">𝕏 でシェア</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========== フッター ========== -->
+  <footer>
+    <div class="footer-title">▸ TAKUMA</div>
+    <div class="footer-desc">
+      人生を数値化するメディア<br>
+      このツールの計算値はすべて概算です。<br>
+      実際の転職活動は個別の状況によって異なります。<br>
+      税率・手取り計算は2024年度の概算値を使用しています。
+    </div>
+
+    <div class="sister-section">
+      <div class="sister-label">▸ MONEY REALITY SERIES</div>
+      <a class="sister-link" href="../tedori_shock_keisan/index.html">
+        <span>💴 手取り額 ショック計算機</span>
+        <span class="price free">無料</span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="sister-link" href="../baito_yukyu_keisan/index.html">
+        <span>🌴 バイト 有給休暇 自動計算ツール</span>
+        <span class="price">¥500</span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="sister-link" href="../zangyou_michibarai_checker/index.html">
+        <span>🚨 残業代 未払い発見チェッカー</span>
+        <span class="price">¥500</span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="sister-link" href="#" style="cursor: not-allowed; opacity: 0.6;">
+        <span>📋 副業収入 住民税 会社バレリスク判定</span>
+        <span class="price soon">近日</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="note-link">
+      <a href="https://note.com/nissy1007" target="_blank" rel="noopener">▷ note.com/nissy1007</a>
+    </div>
+    <div class="disclaimer-final">© Career Timing Calculator · Money Reality Series</div>
+  </footer>
+</div>
+
+<div class="toast" id="toast">COPIED</div>
+
+<script>
+'use strict';
+
+/* ========== 状態 ========== */
+const state = {
+  income: 400,        // 万円
+  tenure: '3-4',
+  industry: 'IT',
+  age: 28,
+  upRate: 20,         // %
+  size: '中企業',
+  lifestyle: [],
+  bonus: '支給済',
+  satisfaction: { work: 5, relation: 5, salary: 5, future: 5 }, // 0-10
+  activity: '少し',
+};
+
+const SAT_AXES = [
+  { id: 'work',     name: '💼 仕事内容' },
+  { id: 'relation', name: '👥 人間関係' },
+  { id: 'salary',   name: '💴 給与・待遇' },
+  { id: 'future',   name: '🌅 将来性' },
+];
+
+const INDUSTRY_HEAT = [
+  { id: 'IT',     name: '💻 IT・Web',      heat: 92 },
+  { id: '金融',   name: '📊 金融・保険',   heat: 78 },
+  { id: '製造',   name: '🏭 製造業',       heat: 58 },
+  { id: '医療',   name: '🏥 医療・福祉',   heat: 72 },
+  { id: '小売',   name: '🛒 小売・流通',   heat: 52 },
+  { id: '不動産', name: '🏢 不動産',       heat: 68 },
+  { id: '教育',   name: '🎓 教育',         heat: 48 },
+  { id: 'その他', name: '🔧 その他',       heat: 60 },
+];
+
+/* ========== ヘルパー ========== */
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
+const fmt = (n) => Math.round(n).toLocaleString('ja-JP');
+const fmt1 = (n) => (Math.round(n * 10) / 10).toLocaleString('ja-JP');
+
+function updateSliderBg(slider) {
+  const min = parseFloat(slider.min);
+  const max = parseFloat(slider.max);
+  const val = parseFloat(slider.value);
+  const pct = ((val - min) / (max - min)) * 100;
+  slider.style.setProperty('--pct', pct + '%');
+}
+
+/* ========== 手取り率 ========== */
+function getTakeHomeRate(annual_man) {
+  if (annual_man < 300) return 0.83;
+  if (annual_man < 400) return 0.80;
+  if (annual_man < 500) return 0.78;
+  if (annual_man < 600) return 0.76;
+  if (annual_man < 700) return 0.74;
+  if (annual_man < 800) return 0.72;
+  return 0.70;
+}
+
+/* ========== 失業期間（ヶ月） ========== */
+function getUnemployedMonths(industry, age) {
+  const fast = (industry === 'IT' || industry === '金融');
+  if (age <= 35) return fast ? 0.5 : 1.5;
+  if (age <= 45) return fast ? 2 : 3;
+  return fast ? 4 : 6;
+}
+
+/* ========== 退職金損失（月数換算） ========== */
+function getSeveranceLossMonths(tenure) {
+  const map = { '<1': 0.2, '1-2': 0.5, '3-4': 1.5, '5-7': 3, '8-10': 6, '10+': 12 };
+  return map[tenure] || 0;
+}
+
+/* ========== 賞与損失（月数換算） ========== */
+function getBonusLossMonths(bonusStatus) {
+  // 「支給前」だと 1.5ヶ月分損失、それ以外は0
+  return bonusStatus === '支給前' ? 1.5 : 0;
+}
+
+/* ========== STEP1 イベント ========== */
+const incomeSlider = $('#incomeSlider');
+incomeSlider.addEventListener('input', () => {
+  state.income = parseInt(incomeSlider.value, 10);
+  $('#incomeVal').textContent = state.income;
+  updateSliderBg(incomeSlider);
+  updateRealtime();
+});
+updateSliderBg(incomeSlider);
+
+const ageSlider = $('#ageSlider');
+ageSlider.addEventListener('input', () => {
+  state.age = parseInt(ageSlider.value, 10);
+  $('#ageVal').textContent = state.age;
+  updateSliderBg(ageSlider);
+});
+updateSliderBg(ageSlider);
+
+function bindBtnGroup(selector, key) {
+  $$(selector + ' .opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $$(selector + ' .opt-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state[key] = btn.dataset[key === 'tenure' ? 'tenure'
+                        : key === 'industry' ? 'industry'
+                        : key === 'upRate' ? 'up'
+                        : key === 'size' ? 'size'
+                        : key === 'bonus' ? 'bonus'
+                        : key === 'activity' ? 'act' : ''];
+      if (key === 'upRate') state.upRate = parseInt(btn.dataset.up, 10);
+    });
+  });
+}
+bindBtnGroup('#tenureGrid',   'tenure');
+bindBtnGroup('#industryGrid', 'industry');
+bindBtnGroup('#upRateGrid',   'upRate');
+bindBtnGroup('#sizeGrid',     'size');
+bindBtnGroup('#bonusGrid',    'bonus');
+bindBtnGroup('#activityGrid', 'activity');
+
+/* ライフスタイル checkbox */
+$$('#lifestyleGrid input[type="checkbox"]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    cb.closest('.check-row').classList.toggle('checked', cb.checked);
+    state.lifestyle = Array.from($$('#lifestyleGrid input:checked')).map(x => x.dataset.life);
+  });
+});
+
+/* 満足度スライダー生成 */
+function renderSatSliders() {
+  const c = $('#satGrid');
+  c.innerHTML = '';
+  SAT_AXES.forEach(ax => {
+    const wrap = document.createElement('div');
+    wrap.className = 'sat-item';
+    wrap.innerHTML = `
+      <div class="sat-head">
+        <div class="sat-name">${ax.name}</div>
+        <div class="sat-value"><span id="sat-${ax.id}">5</span><span class="max">/10</span></div>
+      </div>
+      <div class="slider-touch">
+        <input type="range" id="satSlider-${ax.id}" min="0" max="10" step="1" value="5">
+      </div>
+    `;
+    c.appendChild(wrap);
+    const sl = wrap.querySelector('input');
+    sl.addEventListener('input', () => {
+      const v = parseInt(sl.value, 10);
+      state.satisfaction[ax.id] = v;
+      $(`#sat-${ax.id}`).textContent = v;
+      updateSliderBg(sl);
+      $('#satTotal').textContent = Object.values(state.satisfaction).reduce((a,b)=>a+b,0);
+    });
+    updateSliderBg(sl);
+  });
+}
+renderSatSliders();
+
+/* ========== リアルタイム更新 ========== */
+function updateRealtime() {
+  const annual_yen = state.income * 10000;
+  const monthly = annual_yen / 12;
+  const rate = getTakeHomeRate(state.income);
+  const takeHomeMonth = monthly * rate;
+  $('#monthlyVal').textContent = fmt(monthly);
+  $('#takeHomeVal').textContent = fmt(takeHomeMonth);
+}
+updateRealtime();
+
+/* ========== 計算ロジック ========== */
+function calculate() {
+  // 基本値
+  const nowAnnual_yen = state.income * 10000;
+  const nowRate = getTakeHomeRate(state.income);
+  const nowAnnualTake = nowAnnual_yen * nowRate;
+  const nowMonthTake = nowAnnualTake / 12;
+  const nowMonthGross = nowAnnual_yen / 12;
+
+  // 転職後
+  const afterAnnual_yen = nowAnnual_yen * (1 + state.upRate / 100);
+  const afterAnnual_man = afterAnnual_yen / 10000;
+  const afterRate = getTakeHomeRate(afterAnnual_man);
+  const afterAnnualTake = afterAnnual_yen * afterRate;
+  const afterMonthTake = afterAnnualTake / 12;
+
+  // 差額
+  const yearDiff = afterAnnualTake - nowAnnualTake;
+  const fiveYearDiff = yearDiff * 5;
+  const monthDiff = afterMonthTake - nowMonthTake;
+
+  // コスト
+  const unemMonths = getUnemployedMonths(state.industry, state.age);
+  const unemCost = nowMonthGross * unemMonths;
+  const bonusMonths = getBonusLossMonths(state.bonus);
+  const bonusCost = nowMonthGross * bonusMonths;
+  const sevMonths = getSeveranceLossMonths(state.tenure);
+  const sevCost = nowMonthGross * sevMonths;
+  const leaveCost = nowMonthGross * 0.1; // 有給リセット概算（10日分=月収0.5÷5≒0.1ヶ月）
+  const totalCost = unemCost + bonusCost + sevCost + leaveCost;
+
+  // ROI
+  const roiMonths = monthDiff > 0 ? totalCost / monthDiff : Infinity;
+
+  // タイミングスコア
+  let score = 50;
+  // 勤続
+  if (state.tenure === '3-4' || state.tenure === '5-7') score += 20;
+  else if (state.tenure === '1-2') score -= 10;
+  else if (state.tenure === '<1') score -= 15;
+  else if (state.tenure === '10+') score -= 5;
+  // 年齢
+  if (state.age >= 25 && state.age <= 32) score += 15;
+  else if (state.age >= 33 && state.age <= 40) score += 5;
+  else if (state.age >= 45) score -= 15;
+  // 賞与
+  if (state.bonus === '支給済') score += 15;
+  else if (state.bonus === '支給前') score -= 15;
+  // 年収UP
+  if (state.upRate >= 20) score += 20;
+  else if (state.upRate === 0) score -= 10;
+  // 業種
+  if (state.industry === 'IT' || state.industry === '金融') score += 10;
+  // 活動時間
+  if (state.activity === 'たっぷり' || state.activity === 'まあまあ') score += 10;
+  else if (state.activity === 'ほぼない') score -= 10;
+  // 満足度
+  const satTotal = Object.values(state.satisfaction).reduce((a,b)=>a+b,0) * 2.5; // out of 100
+  if (satTotal >= 60) score -= 10;
+  else if (satTotal <= 20) score += 10;
+
+  score = Math.max(0, Math.min(100, score));
+
+  // 市場価値スコア
+  let market = 50;
+  if (state.age >= 25 && state.age <= 32) market += 25;
+  else if (state.age >= 33 && state.age <= 40) market += 10;
+  else if (state.age >= 45) market -= 20;
+  if (state.industry === 'IT') market += 15;
+  else if (state.industry === '金融') market += 10;
+  else if (state.industry === '教育') market -= 5;
+  if (state.tenure === '3-4' || state.tenure === '5-7') market += 10;
+  else if (state.tenure === '<1' || state.tenure === '10+') market -= 5;
+  if (state.income >= 400 && state.income <= 700) market += 5;
+  market = Math.max(0, Math.min(100, market));
+
+  return {
+    nowMonthTake, nowMonthGross, afterMonthTake,
+    nowAnnualTake, afterAnnualTake,
+    yearDiff, fiveYearDiff, monthDiff,
+    unemCost, bonusCost, sevCost, leaveCost, totalCost,
+    unemMonths, bonusMonths, sevMonths,
+    roiMonths,
+    score, market,
+    satTotal: Object.values(state.satisfaction).reduce((a,b)=>a+b,0),
+  };
+}
+
+/* ========== タイミング判定 ========== */
+function getTiming(score) {
+  if (score >= 80) return {
+    lv: 'go', icon: '🟢', name: '今すぐ動くべき',
+    msg: '条件が揃っています。3ヶ月以内の内定獲得を目指してください。'
+  };
+  if (score >= 60) return {
+    lv: 'prepare', icon: '🔵', name: '準備を始める段階',
+    msg: '転職活動を開始するタイミングです。職務経歴書の準備から始めましょう。'
+  };
+  if (score >= 40) return {
+    lv: 'wait', icon: '🟡', name: 'あと数ヶ月待つのが最適',
+    msg: '賞与支給後・勤続年数を積んでから動くと有利です。'
+  };
+  if (score >= 20) return {
+    lv: 'build', icon: '🟠', name: '条件整備が先',
+    msg: 'スキル・資格・実績を積んでから判断してください。'
+  };
+  return {
+    lv: 'stay', icon: '🔴', name: '現状維持推奨',
+    msg: '転職コストが回収できない可能性があります。社内交渉や副業も検討を。'
+  };
+}
+
+/* ========== 結果描画 ========== */
+function renderResults() {
+  const r = calculate();
+
+  // ① タイミング判定
+  const t = getTiming(r.score);
+  const banner = $('#timingBanner');
+  banner.className = 'timing-banner lv-' + t.lv;
+  $('#timingIcon').textContent = t.icon;
+  $('#timingName').textContent = t.name;
+  $('#timingMessage').textContent = t.msg;
+  animateNumber($('#timingScore'), r.score, 1200);
+
+  // ② 手取りシミュレーション
+  animateNumber($('#simNowMonth'), Math.round(r.nowMonthTake), 1000);
+  animateNumber($('#simAfterMonth'), Math.round(r.afterMonthTake), 1200);
+  animateNumber($('#simYearDiff'), Math.round(Math.abs(r.yearDiff)), 1200);
+  animateNumber($('#sim5yDiff'), Math.round(Math.abs(r.fiveYearDiff)), 1400);
+  // マイナスの場合の符号変更
+  $$('.sim-diff .num').forEach((el, i) => {
+    el.classList.toggle('minus', r.yearDiff < 0);
+    const sign = el.querySelector('.sign');
+    if (sign) sign.textContent = r.yearDiff < 0 ? '−' : '+';
+  });
+
+  // ③ コスト
+  const costList = $('#costList');
+  costList.innerHTML = `
+    <div class="cost-row">
+      <span class="ck-lbl">▸ 失業期間の収入ロス（${r.unemMonths}ヶ月）</span>
+      <span class="ck-val">¥${fmt(r.unemCost)}</span>
+    </div>
+    <div class="cost-row" style="${r.bonusCost === 0 ? 'opacity:0.5;' : ''}">
+      <span class="ck-lbl">▸ 賞与の損失${r.bonusCost === 0 ? '（支給済のためゼロ）' : '（' + r.bonusMonths + 'ヶ月分）'}</span>
+      <span class="ck-val">¥${fmt(r.bonusCost)}</span>
+    </div>
+    <div class="cost-row">
+      <span class="ck-lbl">▸ 退職金損失（${r.sevMonths}ヶ月分）</span>
+      <span class="ck-val">¥${fmt(r.sevCost)}</span>
+    </div>
+    <div class="cost-row">
+      <span class="ck-lbl">▸ 有給リセット損失</span>
+      <span class="ck-val">¥${fmt(r.leaveCost)}</span>
+    </div>
+    <div class="cost-row total">
+      <span class="ck-lbl">▸ 合計</span>
+      <span class="ck-val">¥${fmt(r.totalCost)}</span>
+    </div>
+  `;
+
+  // ROI
+  if (isFinite(r.roiMonths) && r.roiMonths > 0) {
+    $('#roiMonths').textContent = fmt1(r.roiMonths);
+    let msg = '';
+    if (r.roiMonths <= 3) msg = '🟢 即転職が得！転職後 ' + fmt1(r.roiMonths) + 'ヶ月で元が取れます。';
+    else if (r.roiMonths <= 6) msg = '🟢 転職メリット大。' + fmt1(r.roiMonths) + 'ヶ月で投資回収できる計算です。';
+    else if (r.roiMonths <= 12) msg = '🟡 条件次第。' + fmt1(r.roiMonths) + 'ヶ月の回収期間を見込みます。';
+    else if (r.roiMonths <= 24) msg = '🟠 慎重判断推奨。' + fmt1(r.roiMonths) + 'ヶ月かかります。';
+    else msg = '🔴 ' + fmt1(r.roiMonths) + 'ヶ月の回収期間。現状維持も選択肢に。';
+    $('#roiMsg').innerHTML = msg;
+  } else {
+    $('#roiMonths').textContent = '—';
+    $('#roiMsg').textContent = '年収アップなしの場合、ROIは算出できません。';
+  }
+
+  // ④ 比較表
+  renderComparison(r);
+
+  // ⑤ 市場価値スコア
+  $('#marketPointer').style.left = r.market + '%';
+  animateNumber($('#marketScore'), r.market, 1200);
+  const successRate = Math.min(95, Math.max(20, Math.round(r.market * 0.85 + 10)));
+  animateNumber($('#successRate'), successRate, 1200);
+  let marketMsgText = `あなたの市場価値は<strong style="color:#2dd4bf;">${r.market}/100</strong>。`;
+  if (r.market >= 75) marketMsgText += '<br>需要が高い層です。条件交渉も強気でOK。';
+  else if (r.market >= 55) marketMsgText += '<br>標準的な需要層。条件整備で更にUPできます。';
+  else marketMsgText += '<br>スキル・実績の上積みで需要を高められます。';
+  marketMsgText += `<br>同年代・同業種の転職成功率目安：<span class="hl">${successRate}%</span>`;
+  $('#marketMsg').innerHTML = marketMsgText;
+
+  // 業種別熱量
+  renderIndustryHeat();
+
+  // ⑥ レーダーチャート
+  renderRadar();
+
+  // ⑦ アクションプラン
+  renderActionPlan(t.lv, r);
+}
+
+/* ========== 比較表 ========== */
+function renderComparison(r) {
+  // 3ヶ月後想定: 賞与受け取り後 / コスト軽減
+  const waitR = {
+    monthDiff: r.monthDiff,
+    yearDiff: r.yearDiff,
+    fiveYearDiff: r.fiveYearDiff,
+    // 賞与は完全に受け取った前提
+    bonusCost: 0,
+    totalCost: r.totalCost - r.bonusCost,
+    roiMonths: r.monthDiff > 0 ? (r.totalCost - r.bonusCost) / r.monthDiff : Infinity,
+  };
+  const tbody = $('#comparisonBody');
+  const rowHighlight = waitR.totalCost < r.totalCost ? 'wait' : 'now';
+  tbody.innerHTML = `
+    <tr>
+      <td>手取り増加額（年）</td>
+      <td class="num-cell">¥${fmt(r.yearDiff)}</td>
+      <td class="num-cell">¥${fmt(r.yearDiff)}</td>
+    </tr>
+    <tr>
+      <td>賞与の損失</td>
+      <td class="num-cell">¥${fmt(r.bonusCost)}</td>
+      <td class="num-cell" style="color:#22c55e;">¥0</td>
+    </tr>
+    <tr>
+      <td>合計コスト</td>
+      <td class="num-cell">¥${fmt(r.totalCost)}</td>
+      <td class="num-cell">¥${fmt(waitR.totalCost)}</td>
+    </tr>
+    <tr>
+      <td>投資回収期間</td>
+      <td class="num-cell">${isFinite(r.roiMonths) ? fmt1(r.roiMonths) + 'ヶ月' : '—'}</td>
+      <td class="num-cell">${isFinite(waitR.roiMonths) ? fmt1(waitR.roiMonths) + 'ヶ月' : '—'}</td>
+    </tr>
+    <tr>
+      <td>5年後の差</td>
+      <td class="num-cell">¥${fmt(r.fiveYearDiff - r.totalCost)}</td>
+      <td class="num-cell">¥${fmt(waitR.fiveYearDiff - waitR.totalCost)}</td>
+    </tr>
+    <tr class="${r.bonusCost > 0 ? 'highlight' : ''}">
+      <td>判定</td>
+      <td class="verdict" style="color:${r.bonusCost > 0 ? '#f97316' : '#22c55e'};">${r.bonusCost > 0 ? '△ 損失あり' : '◎ OK'}</td>
+      <td class="verdict" style="color:${r.bonusCost > 0 ? '#22c55e' : '#94a3b8'};">${r.bonusCost > 0 ? '◎ おすすめ' : '○ 急ぐ必要なし'}</td>
+    </tr>
+  `;
+}
+
+/* ========== 業種別熱量 ========== */
+function renderIndustryHeat() {
+  const list = $('#heatList');
+  list.innerHTML = '';
+  INDUSTRY_HEAT.forEach((it, i) => {
+    const isYours = it.id === state.industry;
+    const row = document.createElement('div');
+    row.className = 'heat-row' + (isYours ? ' your' : '');
+    row.innerHTML = `
+      <div class="heat-head">
+        <span class="heat-name">${it.name}${isYours ? '（あなた）' : ''}</span>
+        <span class="heat-pct">${it.heat}</span>
+      </div>
+      <div class="heat-bar">
+        <div class="heat-fill" data-pct="${it.heat}"></div>
+      </div>
+    `;
+    list.appendChild(row);
+    setTimeout(() => {
+      row.querySelector('.heat-fill').style.width = it.heat + '%';
+    }, 100 + i * 70);
+  });
+}
+
+/* ========== レーダーチャート ========== */
+function renderRadar() {
+  const svg = $('#radarSvg');
+  const cx = 160, cy = 140, r = 100;
+  const values = SAT_AXES.map(ax => state.satisfaction[ax.id]); // 0-10
+  // 4軸の座標（上下左右）
+  const positions = [
+    { angle: -Math.PI / 2, label: SAT_AXES[0].name }, // top
+    { angle: 0,           label: SAT_AXES[1].name }, // right
+    { angle: Math.PI / 2, label: SAT_AXES[2].name }, // bottom
+    { angle: Math.PI,     label: SAT_AXES[3].name }, // left
+  ];
+
+  let gridHtml = '';
+  // グリッドライン（4段階）
+  [0.25, 0.5, 0.75, 1.0].forEach(scale => {
+    const pts = positions.map(p => {
+      const x = cx + Math.cos(p.angle) * r * scale;
+      const y = cy + Math.sin(p.angle) * r * scale;
+      return `${x},${y}`;
+    }).join(' ');
+    gridHtml += `<polygon points="${pts}" fill="none" stroke="#134e4a" stroke-width="1" opacity="${0.4 + scale * 0.4}"/>`;
+  });
+  // 軸ライン
+  positions.forEach(p => {
+    const x = cx + Math.cos(p.angle) * r;
+    const y = cy + Math.sin(p.angle) * r;
+    gridHtml += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="#134e4a" stroke-width="1" opacity="0.6"/>`;
+  });
+
+  // 値ポリゴン
+  const valPts = positions.map((p, i) => {
+    const scale = values[i] / 10;
+    const x = cx + Math.cos(p.angle) * r * scale;
+    const y = cy + Math.sin(p.angle) * r * scale;
+    return `${x},${y}`;
+  }).join(' ');
+  const valHtml = `
+    <polygon points="${valPts}" fill="rgba(20, 184, 166, 0.25)" stroke="#14b8a6" stroke-width="2" stroke-linejoin="round">
+      <animate attributeName="opacity" from="0" to="1" dur="1.5s" fill="freeze"/>
+    </polygon>
+  `;
+  // 各頂点ドット（転職すべき軸=赤 / 現状維持OK軸=緑 / 中間=グレー）
+  let dots = '';
+  positions.forEach((p, i) => {
+    const v = values[i];
+    const color = v <= 3 ? '#ef4444' : v >= 7 ? '#22c55e' : '#94a3b8';
+    const scale = v / 10;
+    const x = cx + Math.cos(p.angle) * r * scale;
+    const y = cy + Math.sin(p.angle) * r * scale;
+    dots += `<circle cx="${x}" cy="${y}" r="5" fill="${color}" stroke="#0a0a0f" stroke-width="2"/>`;
+  });
+  // ラベル
+  let labels = '';
+  positions.forEach((p, i) => {
+    const off = 18;
+    const x = cx + Math.cos(p.angle) * (r + off);
+    const y = cy + Math.sin(p.angle) * (r + off) + 4;
+    labels += `<text x="${x}" y="${y}" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="700">${positions[i].label}</text>`;
+    // 値テキスト
+    const vx = cx + Math.cos(p.angle) * (r + off + 14);
+    const vy = cy + Math.sin(p.angle) * (r + off + 14) + 4;
+    labels += `<text x="${vx}" y="${vy}" text-anchor="middle" fill="#2dd4bf" font-size="10" font-family="Orbitron, monospace" font-weight="800">${values[i]}/10</text>`;
+  });
+
+  svg.innerHTML = gridHtml + valHtml + dots + labels;
+
+  // 凡例
+  const legend = $('#radarLegend');
+  legend.innerHTML = SAT_AXES.map((ax, i) => {
+    const v = values[i];
+    const tag = v <= 3 ? 'leave' : v >= 7 ? 'stay' : 'neutral';
+    const verdict = v <= 3 ? '転職すべき軸' : v >= 7 ? '現状維持でOK' : '判断保留';
+    return `
+      <div class="legend-item tag-${tag}">
+        <span class="dot"></span>
+        <span><strong>${ax.name}</strong>：${v}/10 · ${verdict}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ========== アクションプラン ========== */
+function renderActionPlan(lv, r) {
+  const plans = {
+    go: [
+      '今週中に転職サイト2社に登録（リクルートエージェント / ビズリーチなど）',
+      '今月中に3社以上にエントリー・スカウト経由でカジュアル面談',
+      '来月から面接対策（職務経歴書の数字化・想定問答の準備）',
+    ],
+    prepare: [
+      '職務経歴書を今月中に完成させる（成果は数字で記載）',
+      '転職サイト・スカウト型サービス（ビズリーチ等）に登録',
+      '市場調査を始める（同業種の年収レンジ・求人数を確認）',
+    ],
+    wait: [
+      '賞与支給日（あと数ヶ月）まで待つ。それまで動かない',
+      'その間に職務経歴書・ポートフォリオを準備（前倒し）',
+      'スカウト型サイトに登録だけしておく（市場感を掴む）',
+    ],
+    build: [
+      '今の会社で「数字で語れる実績」を3つ作る（今後6ヶ月）',
+      '転職に有利な資格を1つ取得（業種に応じて）',
+      '1年後に再度このツールで再評価する',
+    ],
+    stay: [
+      'まず副業で月3万円を稼ぐ仕組みを作る（収入の安定化）',
+      '社内で年収UPの交渉を試みる（評価面談を活用）',
+      '2年後に再度このツールで再評価する',
+    ],
+  };
+  const arr = plans[lv] || plans.prepare;
+  $('#actionList').innerHTML = arr.map(a => `<li>${a}</li>`).join('');
+}
+
+/* ========== カウントアップ ========== */
+function animateNumber(el, target, duration) {
+  const start = parseFloat(String(el.textContent).replace(/[,]/g, '')) || 0;
+  const startTime = performance.now();
+  function step(now) {
+    const t = Math.min(1, (now - startTime) / duration);
+    const eased = 1 - Math.pow(1 - t, 3);
+    const cur = start + (target - start) * eased;
+    el.textContent = fmt(cur);
+    if (t < 1) requestAnimationFrame(step);
+    else el.textContent = fmt(target);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ========== 計算ボタン ========== */
+$('#calcBtn').addEventListener('click', () => {
+  const resultArea = $('#resultArea');
+  const isFirst = !resultArea.classList.contains('show');
+  resultArea.classList.add('show');
+  $('#ctaWrap').classList.add('calculated');
+  $('#calcBtn').textContent = '↻ 再計算する';
+  renderResults();
+  if (isFirst) {
+    setTimeout(() => {
+      $('#timingBanner').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 200);
+  }
+});
+
+/* ========== PDF出力（印刷） ========== */
+$('#pdfBtn').addEventListener('click', () => {
+  // ファイル名のヒント（実際にはブラウザの保存ダイアログで変更される）
+  const today = new Date();
+  const dateStr = `${today.getFullYear()}${String(today.getMonth()+1).padStart(2,'0')}${String(today.getDate()).padStart(2,'0')}`;
+  const originalTitle = document.title;
+  document.title = `転職タイミング診断_${dateStr}`;
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => { document.title = originalTitle; }, 100);
+  }, 100);
+});
+
+/* ========== シェア ========== */
+function buildShareText() {
+  const r = calculate();
+  const t = getTiming(r.score);
+  return `【転職タイミング診断】
+
+判定：${t.icon} ${t.name}
+スコア：${r.score}/100
+
+手取り増加（年）：¥${fmt(r.yearDiff)}
+投資回収期間：${isFinite(r.roiMonths) ? fmt1(r.roiMonths) + 'ヶ月' : '—'}
+市場価値：${r.market}/100
+
+#転職 #手取り #お金の現実`;
+}
+
+$('#copyBtn').addEventListener('click', async () => {
+  const text = buildShareText();
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('COPIED');
+  } catch (e) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('COPIED');
+  }
+});
+
+$('#tweetBtn').addEventListener('click', () => {
+  const text = encodeURIComponent(buildShareText());
+  const url = encodeURIComponent(location.href);
+  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank', 'noopener');
+});
+
+function showToast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+/* ========== 初期化 ========== */
+$('#satTotal').textContent = Object.values(state.satisfaction).reduce((a,b)=>a+b,0);
+</script>
+</body>
+</html>
