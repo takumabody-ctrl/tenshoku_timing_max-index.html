@@ -285,28 +285,42 @@
     border-radius: 0;
     outline: none;
     margin: 14px 0;
+    /* スライダーのタッチ操作を確実に：水平スワイプとタップを許可、垂直スクロール介入を防ぐ */
+    touch-action: pan-x;
+    -ms-touch-action: pan-x;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
   }
   input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 22px; height: 22px;
+    width: 24px; height: 24px;
     border-radius: 50%;
     background: #0a0a0f;
     border: 2px solid #14b8a6;
-    cursor: pointer;
+    cursor: grab;
     box-shadow: 0 0 14px rgba(20, 184, 166, 0.6);
     transition: transform 0.18s;
+    touch-action: pan-x;
   }
   input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+  input[type="range"]::-webkit-slider-thumb:active { cursor: grabbing; transform: scale(1.2); }
   input[type="range"]::-moz-range-thumb {
-    width: 22px; height: 22px;
+    width: 24px; height: 24px;
     border-radius: 50%;
     background: #0a0a0f;
     border: 2px solid #14b8a6;
-    cursor: pointer;
+    cursor: grab;
     box-shadow: 0 0 14px rgba(20, 184, 166, 0.6);
   }
-  .slider-touch { padding: 12px 0; margin: -12px 0; }
+  /* スライダー周辺のヒット領域を確保（負マージンによる重なりを排除） */
+  .slider-touch {
+    padding: 8px 0;
+    position: relative;
+    z-index: 2;
+    touch-action: pan-x;
+  }
   .slider-marks {
     display: flex;
     justify-content: space-between;
